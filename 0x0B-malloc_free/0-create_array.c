@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "main.h"
+
 /**
-* create_array 
+* create_array - Create an array
 * @size: argument for size of the array
 * @c: argument for char
 * Return: Always 0.
@@ -19,6 +20,6 @@ return (NULL);
 }
 my_array[i] = c;
 i++;
-    }
-  return (my_array);
+}
+return (my_array);
 }
