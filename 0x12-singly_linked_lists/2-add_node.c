@@ -1,48 +1,46 @@
 #include "lists.h"
 #include <stdlib.h>
-#include <string.h>
-
 /**
- * _strlen - finds the length of a string
- * @str: string to be searched
- *
- * Return: length of the string
- */
-unsigned int _strlen(char *str)
+* _strlen - gets length of the string
+* @s: string
+* Return: length of the string
+*/
+int _strlen(const char *s)
 {
-  unsigned int i;
-
-  for (i = 0; str[i]; i++)
-    ;
-  return (i);
+int i;
+for (i = 0; s[i]; i++)
+;
+return (i);
 }
 /**
- * add_node - add a node to the beginning of a linked list
- * @head: double pointer to the head of a linked list
- * @str: string to add to the new node
- *
- * Return: pointer to the new node .
- */
-
+* add_node - add new nodes to the list
+* @head: current place in the list
+* @str: string to add to the head
+* Return: pointer to current position in list
+*/
 list_t *add_node(list_t **head, const char *str)
 {
-  list_t *newnode;
-
-  if (str == NULL)
-    return (NULL);
-
-  newnode = (list_t *)malloc(sizeof(list_t));
-  if (newnode == NULL)
-    return (NULL);
-
-  newnode->str = strdup(str);
-  if (newnode->str == NULL)
-    {
-      free(newnode);
-      return (NULL);
-    }
-  newnode->len = _strlen(newnode->str);
-  newnode->next = *head;
-  *head = newnode;
-  return (newnode);
+int i, len;
+char *content;
+list_t *new;
+if (str == NULL || head == NULL)
+return (NULL);
+len = _strlen(str);
+new = *head;
+content = malloc((len + 1) * sizeof(char));
+if (content == NULL)
+return (NULL);
+for (i = 0; str[i]; i++)
+content[i] = str[i];
+new = malloc(sizeof(list_t));
+if (new == NULL)
+{
+free(content);
+return (NULL);
+}
+new->str = content;
+new->len = len;
+new->next = *head;
+*head = new;
+return (new);
 }
